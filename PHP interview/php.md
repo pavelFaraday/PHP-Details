@@ -325,7 +325,8 @@ spl_autoload_register(function($class_name) {
 
 *I had created a variable to represent a DB handler, make that equal to **new** PDO Object Instance. So I supply the hostname for the DB driver that I wanted, in my case it's MySQL DataBase and host - localhost. Other parametres are: DB Name, DB UserName and DB Password. And because PHP Manual recommends that we use **try and catch**, I did it so.*
     
-```try {
+```
+try {
     self::$pdo = new PDO('mysql:host='.DB_HOST.'; dbname='.DB_NAME, DB_USER, DB_PASS);
     } catch (PDOException $e) {
     echo $e->getMessage();
