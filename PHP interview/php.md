@@ -1,14 +1,19 @@
 
-1) Class, Method and Object, OOP principles
-**PHP Classes**
+
+
+## PHP Classes
+
 *Classes are the blueprints, templates for making many instances of the same kind of objects. Classes is used to model or map a real-world entity to a template of data (properties) and functionality (methods). For example, there is a single Product class, but many Product objects can be instances of this class — book, DVD-disc, Furniture, etc. One of the big differences between functions and classes is that a class contains both data (variables) and functions that form a package called an: 'object.*
 
-**Method and Object**
+## Method and Object
+
 *Also, Class  includes local variables(properties) and local methods(functions). For example, for the Product class, we might have name,price, and size. Then each Product object will have its own values for those properties. You can also define methods in the class that allow you to manipulate the values of object properties and perform operations on objects. As an example, you could define a save method which saves the object information to a database.*
 *In OOP, a class is a definition of an object, whereas an object is an instance of an object, meaning that from one class you can create many objects. you define a class once and then make many objects that belong to it. Objects are also known as instance.*
 
-**OOP principles**
-A) Encapsulation 
+## OOP principles
+
+**A) Encapsulation** 
+
 *Encapsulation is the mechanism of hiding of data implementation by restricting access to public methods. Instance variables are kept private and accessor methods are made public to achieve this. For example, in this Product class we are hiding the barcode and name attributes of Product:*
 
 
@@ -32,48 +37,56 @@ A) Encapsulation
 ```
 
 
-B) Abstraction
+**B) Abstraction**
 
 *Abstract means a concept or an Idea which is not associated with any particular instance. Using abstract class/Interface we express the intent of the class rather than the actual implementation. In a way, one class should not know the inner details of another in order to use it, just knowing the interfaces should be good enough. In my example, Product class can only access/read in Main class to table propertie:*
 
------------------------------------------
-class Product extends Main
+
+```class Product extends Main
 {
     protected $table = 'products';
 
     private $barcode;
     private $name;
 }
------------------------------------------ 
+```
 
 
-C) Inheritance
+**C) Inheritance**
+
 *Inheritance is an important aspect of the object-oriented programming paradigm which allows you to inherit properties and methods of other classes by extending them. The class which is being inherited is called the parent class, and the class which inherits the other class is called the child class. When you instantiate an object of the child class, it inherits the properties and methods of the parent class as well.*
 *For example, when we want to use class A code (properties and methods) in class B, We use "extends" keyword..  B class is abled to use A classes properties and methods*
 *In my task example Class Product is child class and extends Class Main and it inherits properties and methods of Class Product*
 
-D) Polymorphism
+
+**D) Polymorphism**
+
 *polymorphism means the ability to have many forms. It describes a pattern in which a class has varying functionality while sharing a common interfaces. Instead of sending in the specific implementations, We would create classes such that they have common interface and a common type. We can write a code that works on the superclass, and it will work with any subclass type as well. The beauty of polymorphism is that the code working with the different classes does not need to know which class it is using since they're all used the same way. you create interchangeable objects that you select based on your needs. That is the basic goal of polymorphism. That allows your code to be more flexible, easier to maintain and more dynamic.*
 
 *When we start to extend classes, and add functionality to them which wasn't there previously, and even override existing methods (functions), this is called polymorphism. The basis of polymorphism is Inheritance and overridden methods*
-მაგალითი: https://www.youtube.com/watch?v=4WK-Q0d2o48  (Interface-ის საუკეთესო მაგალითი)
-  
-##############################################################################################################################
 
-2) constructor/destructor
+[Show more on Youtobe..](https://www.youtube.com/watch?v=4WK-Q0d2o48  "Polymorphism")
+  
+
+
+## constructor/destructor
+
 **Constructor**
+
 *A constructor is a special class method which is called automatically when you instantiate an object. It is used to initialize object properties when the object is being created. Classes which have a constructor method call this method on each newly-created object, so it is suitable for any initialization that the object may need before it is used. To add a constructor to a class, you just simply add a special method called __construct()*
 
 **Destructor**
+
 *The destructor method will be called as soon as there are no other references to a particular object, or in any order during the shutdown sequence. It is used for destroying the object.To add a destructor to a class, you just simply add a special method called __destruct().*
 
-##############################################################################################################################
 
-**3) Class constants**
+
+## Class constants
+
 *Constants can be of any of the basic data types.It is possible to define constant values on a per-class basis remaining the same and unchangeable. Constants differ from normal variables in that you don't use the $ symbol to declare or use them. The default visibility of class constants is public.The value must be a constant expression, not (for example) a variable, a property, or a function call. In other words, constant value is the one which does not change during the execution of a program.*
 
------------------------------------------
-class MyClass
+
+```class MyClass
 {
     const CONSTANT = 'constant value';
 
@@ -81,17 +94,19 @@ class MyClass
         echo  self::CONSTANT . "\n";
     }
 }
------------------------------------------
-
-##############################################################################################################################
+```
 
 
-**4) static properties and methods**
+
+
+
+## static properties and methods
+
 *Static Function in PHP. In certain cases, it is very handy to access methods and properties in terms of a class rather than an object. Any method declared as static is accessible without the creation of an object. Static functions are associated with the class, not an instance of the class. In other words, STATIC properties/methods - They don't need make an object for calling outside a class. It receives all information from its arguments. I use static properties For utility methods that don't require any object state. in this file there wasn't no need to access instance variables and used static methods, because they eliminates the need for the caller to instantiate the object just to call the method.*
 *When we use the Normal properties/methods we use $ this keyword to assign them. but with static properties/methods we use self:: keyword!*
 
-----------------------------------------
-class DB
+
+```class DB
 {
     private static $pdo;
 
@@ -106,22 +121,22 @@ class DB
         }
         return self::$pdo;
     }
-----------------------------------------
+```
 
-##############################################################################################################################
 
-**5) inheritance**
+## inheritance
+
 *Inheritance is an important aspect of the object-oriented programming paradigm which allows you to inherit properties and methods of other classes by extending them. The class which is being inherited is called the parent class, and the class which inherits the other class is called the child class. When you instantiate an object of the child class, it inherits the properties and methods of the parent class as well.*
 *For example, when we want to use class A code (properties and methods) in class B, We use "extends" keyword..  B class is abled to use A classes properties and methods*
 *In my task example Class Product is child class and extends Class Main and it inherits properties and methods of Class Product*
 
-##############################################################################################################################
+
 
 **6) Preventing from Extending & Overriding ('final' - keyword)**
 *PHP 5 introduces the final keyword, which prevents child classes from overriding a method by prefixing the definition with final. If the class itself is being defined final then it cannot be extended. Note: Properties and constants cannot be declared final, only classes and methods may be declared as final !!! A class declared as final cannot be extended while a method declared as final cannot be overridden in its subclasses. A method or a class is declared to be final using the final keyword. Though a final class cannot be extended, it can extend other classes.*
 მაგალითი: https://www.youtube.com/watch?v=zFS_ityK-z4&list=PLTydW-y9HsbTlai7BFSPN5gH7GlJGwdB5&index=9   (final-ის საუკეთესო მაგალითი)
 
-----------------------------------------
+
 <?php
 final class BaseClass {
    public function test() {
@@ -138,9 +153,9 @@ class ChildClass extends BaseClass {
 }
 // Results in Fatal error: Class ChildClass may not inherit from final class (BaseClass)
 ?>
-----------------------------------------
 
-##############################################################################################################################
+
+
 
 **7) Access Modifiers (visibility): PUBLIC | PROTECTED | PRIVATE**
 **PUBLIC** - public propertie/method u can use everywhere: inside/outside a class or in extended class too.
@@ -153,7 +168,7 @@ class ChildClass extends BaseClass {
 **abstract** *– This keyword can be used only for PHP classes and its functions. For containing abstract functions, a PHP class should be an abstract class.*
 **final** *– It prevents subclasses to override super class members defined with final keyword.*
 
-##############################################################################################################################
+
 
 **8) interface**
 *An Interface allows the users to create programs, specifying the public methods that a class must implement, without involving the complexities and details of how the particular methods are implemented. It is generally referred to as the next level of abstraction.*
@@ -173,7 +188,7 @@ class ChildClass extends BaseClass {
 *if you make complete method (with body - curly bracket {}) in Interface, there will be ERROR !!*
 *You can make multiple interfaces and implement them all in one single class !!*
 
-##############################################################################################################################
+
 
 **9) Abstract class**
 *Abstract classes are classes that contain one or more abstract methods. An abstract method is a method that is declared, but contains no implementation.*
@@ -201,7 +216,7 @@ abstract class Main
 }
 ---------------------------------------
 
-##############################################################################################################################
+
 
 ****11) Setters & Getters****
 *'Getters' and 'Setters' are object methods that allow you to control access to a certain class variables / properties. A 'getter' allows to you to retrieve or 'get' a given property. A “setter” allows you to “set” the value of a given property.*
@@ -210,7 +225,7 @@ abstract class Main
 
 *When we have private properties. Because they are private properties, you will be unable to access them. To provide access to private properties, you have create getters. These functions simply return the values of private properties. That is all they do.*
 
-----------------------------------------------
+------
 class Product extends Main
 {
     protected $table = 'products';
@@ -229,9 +244,9 @@ class Product extends Main
         $this->name = $name;
     }
 
-----------------------------------------------
+------
 
-##############################################################################################################################
+
 
 **12) Autoloading classes**
 *Many developers writing object-oriented applications create one PHP source file per class definition. One of the biggest annoyances is having to write a long list of needed includes at the beginning of each script (one for each class).In PHP 5, this is no longer necessary. The spl_autoload_register() function registers any number of autoloaders, enabling for classes and interfaces to be automatically loaded if they are currently not defined. By registering autoloaders, PHP is given a last chance to load the class or interface before it fails with an error.*
@@ -240,16 +255,16 @@ class Product extends Main
 
 *My example attempts to load all files from folder 'classes'. '$class_name' is a placeholder for all class file names. ".php" is extension for PHP files in 'classes' folder, which should load by with spl_autoload_register() function.*
 
-----------------------------------------------
+------
 
 // PHP AutoLoader
 spl_autoload_register(function($class_name) {   
     include "classes/".$class_name.".php";   
 });
 
-----------------------------------------------
+------
 
-##############################################################################################################################
+
 
 
 13) PHP Method Chaining
@@ -290,13 +305,13 @@ spl_autoload_register(function($class_name) {
 
    A) Prepared Statements with PDO ||| First thing we will do is add our DB Connection:
    *I had created a variable to represent a DB handler, make that equal to **new** PDO Object Instance. So I supply the hostname for the DB driver that I wanted, in my case it's MySQL DataBase and host - localhost. Other parametres are: DB Name, DB UserName and DB Password. And because PHP Manual recommends that we use **try and catch**, I did it so.*
-    ----------------------------------------------
+    ------
     try {
         self::$pdo = new PDO('mysql:host='.DB_HOST.'; dbname='.DB_NAME, DB_USER, DB_PASS);
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-    ----------------------------------------------
+    ------
 
     A.a) try and catch exception:
    *When a PHP exception is thrown, the PHP runtime looks for a catch statement that can handle that type of exception. It will continue checking the calling methods up the stack trace until a catch statement is found. If one is not found, the exception is handed to the global exception handler that we will also cover in this article.*
@@ -305,22 +320,22 @@ spl_autoload_register(function($class_name) {
 
 
    B) **SELECT * FROM table**  |  *For the next step I established the SQL Syntax for select Data and I selected All Data from Product Table:*
-    ----------------------------------------------
+    ------
     $sql = "SELECT * FROM $this->table"; 
-    ----------------------------------------------
+    ------
 
    C) **INSERT INTO table**  |  *For adding new Data to my table wrote SQL Insert statement: In VALUES I had put named placeholders.*
-    ----------------------------------------------
+    ------
      ```$sql = "INSERT INTO $this->table(barcode, name, price, size, height, width, length, weight, image)VALUES(:barcode, :name, :price, :size, :height, :width, :length, :weight, :image)";```
-    ----------------------------------------------
+    ------
 
    D) **prepare($sql)**  |  *And in the next line of each statmenet I had created a variable named $stmt (statement). This is equal to DB handler and using a OOP approach I had run the prepare($sql) function and put SQL syntax as a parameter.*
-    ----------------------------------------------
+    ------
     $stmt = DB::prepare($sql);
-    ----------------------------------------------
+    ------
 
    E) **bindParam()** | *After this I binded parameters to the prepared statement, so for the $stmt I had run bindParam(':barcode', $this->barcode) function. The first argument is the named placeholder, and the second patameter is the variable data that's used when is executed the prepared statement.*
-    ----------------------------------------------
+    ------
     $stmt->bindParam(':name', $this->name);
     $stmt->bindParam(':price', $this->price);
     $stmt->bindParam(':size', $this->size);
@@ -329,14 +344,14 @@ spl_autoload_register(function($class_name) {
     $stmt->bindParam(':length', $this->length);
     $stmt->bindParam(':weight', $this->weight);
     $stmt->bindParam(':image', $this->image);
-    ----------------------------------------------
+    ------
 
    F) **execute()** *And then I executed prepared statement, so when prepared statement execute() is called to run all data is going to be put in place in the prepared statement and i had insert into my Product table:*
-    ----------------------------------------------
+    ------
     return $stmt->execute();
-    ----------------------------------------------
+    ------
 
-##############################################################################################################################
+
 
 34) Select Data With PDO-Prepared Statements
 35) Update, Delete Data With PDO-Prepared Statements
