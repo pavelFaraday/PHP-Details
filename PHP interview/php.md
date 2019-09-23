@@ -340,24 +340,29 @@ try {
 
 B) **SELECT * FROM table**  |  *For the next step I established the SQL Syntax for select Data and I selected All Data from Product Table:*
     
-```$sql = "SELECT * FROM $this->table";
+```
+$sql = "SELECT * FROM $this->table";
 ```
     
 
 C) **INSERT INTO table**  |  *For adding new Data to my table wrote SQL Insert statement: In VALUES I had put named placeholders.*
     
-```$sql = "INSERT INTO $this->table(barcode, name, price, size, height, width, length, weight, image)VALUES(:barcode, :name, :price, :size, :height, :width, :length, :weight, :image)";```
+```
+$sql = "INSERT INTO $this->table(barcode, name, price, size, height, width, length, weight, image)VALUES(:barcode, :name, :price, :size, :height, :width, :length, :weight, :image)";
+```
     
 
 D) **prepare($sql)**  |  *And in the next line of each statmenet I had created a variable named $stmt (statement). This is equal to DB handler and using a OOP approach I had run the prepare($sql) function and put SQL syntax as a parameter.*
     
-```$stmt = DB::prepare($sql);
+```
+$stmt = DB::prepare($sql);
 ```
     
 
 E) **bindParam()** | *After this I binded parameters to the prepared statement, so for the $stmt I had run bindParam(':barcode', $this->barcode) function. The first argument is the named placeholder, and the second patameter is the variable data that's used when is executed the prepared statement.*
     
-```$stmt->bindParam(':name', $this->name);
+```
+$stmt->bindParam(':name', $this->name);
 $stmt->bindParam(':price', $this->price);
 $stmt->bindParam(':size', $this->size);
 $stmt->bindParam(':height', $this->height);
@@ -369,7 +374,8 @@ $stmt->bindParam(':image', $this->image);
 
 F) **execute()**  |  *And then I executed prepared statement, so when prepared statement execute() is called to run all data is going to be put in place in the prepared statement and i had insert into my Product table:*
     
-```return $stmt->execute();
+```
+return $stmt->execute();
 ```
     
 
