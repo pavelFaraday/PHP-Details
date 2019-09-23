@@ -334,6 +334,10 @@ try {
 ```
 
 **A.a) try and catch exception:**  *When a PHP exception is thrown, the PHP runtime looks for a catch statement that can handle that type of exception. It will continue checking the calling methods up the stack trace until a catch statement is found. If one is not found, the exception is handed to the global exception handler that we will also cover in this article.*
+*If you had a some sort of error on your website, you would be in position, where you tutn on display errors for your site. So that those errors show up your users will be dissatisfied. So **try/catch** block allow us to hide those errors from our users, but at the same time catch those errors and be able to do something with them. **try and catch** are kind of either/or so when you try and run some sort of code and there is an error, that triggers the **catch** block. If you try some code and there is no errors, then **catch** block won't be triggered.* 4:30mm
+[Show more on Youtobe..](https://www.youtube.com/watch?v=zBdJMW0_1RA  "try/catch exception")
+
+
 **Try:** *The try block contains the code that may potentially throw an exception. All of the code within the try block is executed until an exception is potentially thrown.*
 **Catch:** *This block of code will be called only if an exception occurs within the try code block. The code within your catch statement must handle the exception that was thrown.*
 
