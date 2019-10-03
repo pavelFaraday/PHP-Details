@@ -442,10 +442,22 @@ return $stmt->execute();
 
 **Why should we follow this principle?**
 
-
-
 *1) Prevent methods from being dependent on unnecessary classes.*
 *2) Prevent classes from having unnecessary methods.* 
 
+
+
 **5) D - Dependency inversion**
 
+*High low modules, should not depand in low level modules. Dependencies within the system are built on the basis of abstractions. The top-level modules do not depend on the lower-level modules. Abstractions should not depend on details. Details must depend on abstractions.*
+
+**What does the principle mean?**
+
+*1) Don't confuse this with 'Dependency Injection'*
+*2) High level code is not concerned with the details*
+*3) Low level code is concerned with the detail*
+*4) Both shoul depend on abstraction*
+
+**Why should we follow this principle?**
+
+*It allow us to decouple our code.*
