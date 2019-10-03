@@ -382,10 +382,70 @@ F) **execute()**  |  *And then I executed prepared statement, so when prepared s
 return $stmt->execute();
 ```
     
-
-
-
-34) Select Data With PDO-Prepared Statements
-35) Update, Delete Data With PDO-Prepared Statements
-36) CRUD With PDO + Abstract Factory Pattern
 37) Model View Controller (MVC) Design Pattern
+
+
+
+
+
+## SOLID - PHP SOLID pronciples
+
+**1) S - Single responsebility**
+
+*A class should have one, and only one reason to change - a class should have only one task or responsibility. So if there are any other methods in a class that deals with something completely different those methods should be extracted and put somewhere else.*  
+
+**Why we nead for a single responsebility?** 
+
+*1) Makes the class easier to maintain;*
+*2) Potentially makes class reusable;*
+*3) Easier to test;*
+
+
+
+**2) O - Open/Close**
+
+*Entities or classes should be open for extension, but closed for modification. Open for extension - We should be able to change behaviour. But at the same time we need to keep these classes Closed for modification - Change behaviour without modifying the source code (never change the source code of a class). This is a goal.*
+
+*Essentially meaning that classes should be extended to change functionality, rather than being altered.*
+
+**Why should we follow this principle?**
+
+*1) To make it easier to maintain;*
+*2) To prevent 'Code Rot' - prevent the code from becoming slower and unusable;*
+*3) Prevents errors in the code;*
+
+
+
+**3) L - Liskov Substitution**
+
+*Devided classes must be substituable for there base class.*
+
+*Created by Barbara Liskov in a 1987, this states that objects should be replaceable by their subtypes without altering how the program works. In other words, derived classes must be substitutable for their base classes without causing errors. When using the class heir, the result of the code execution should be predictable and do not change the properties of the method.*
+
+**What does this principle mean?**
+
+*1) We have a parent and a child class.*
+*2) We then have a class named 'world' which calls the child*
+*3) class 'world' should be able to swap the child class the parent class without having the code modified.*
+
+**Why should we follow this principle?**
+
+*1) To make it easier to maintain;*
+*2) To prevent 'Code Rot' - prevent the code from becoming slower and unusable;*
+*3) Make code reusable and flexible*
+
+
+
+**4) I - Interface Segregation**
+
+*A client, Should not be forced to implement an interface that it does not use.It states that a client must not be forced to implement an interface that it doesn’t use. It will make sure that Classes are sharing only the knowledge that is required and not just bloating themselves, just because we committed to code to interface. In other words, many client-specific interfaces are better than one general-purpose interface. Many specialized interfaces are better than one universal. Compliance with this principle is necessary to ensure that the client classes that use or implement the interface will know only about the methods that they use, which leads to a reduction in the amount of unused code*
+
+**Why should we follow this principle?**
+
+
+
+*1) Prevent methods from being dependent on unnecessary classes.*
+*2) Prevent classes from having unnecessary methods.* 
+
+**5) D - Dependency inversion**
+
