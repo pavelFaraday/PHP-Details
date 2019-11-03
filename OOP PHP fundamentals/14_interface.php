@@ -18,9 +18,7 @@ interface MyDemo
 interface MyDemo1
 {
     public function myfun1(); 
-    class Daga {
-        echo '<h1>Hy, Everyone...</h1></br>';
-    }
+    public function Daga();
 }
 
 // make Interface 3
