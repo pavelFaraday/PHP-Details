@@ -15,7 +15,7 @@ $display1 = new Data('HTML5 & CSS3');
 // OUTPUT: We are using OOP PHP Aproach - გამოიტანს ორივეს, ახალ ცვლადად არ აღიქვავს !
 // OUTPUT: We are using HTML5 & CSS3 - გამოიტანს ორივეს, ახალ ცვლადად არ აღიქვავს !
 
-// 46:12mm
+
 
 
 ?>

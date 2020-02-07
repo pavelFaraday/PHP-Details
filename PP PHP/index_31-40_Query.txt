@@ -1,0 +1,237 @@
+==============================================================================================================================
+==============================================================================================================================
+
+                                        ------- DB main Queries ------
+
+
+Database: phplessons » Table: posts
+
+
+// 1) ინფორმაციის შეტანა ბაზაში - insert Query
+
+insert INTO posts (subject, content, date) VALUES ('This is subject', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit', '2020-01-22 20:11:25');
+
+---------------------------------------------------------------------------------------------------------
+
+// 2) ინფორმაციის გადმოტანა ბაზიდან - Select Query
+
+SELECT * FROM `posts` 
+
+SELECT `subject` FROM posts
+
+SELECT * FROM `posts` WHERE id='1' 
+
+SELECT * FROM `posts` WHERE id='1' AND subject='This is subject'
+
+SELECT * FROM `posts` WHERE id='1' OR subject='This is ject'
+
+---------------------------------------------------------------------------------------------------------
+
+// 3) ინფორმაციის რედაქტირება - Update Query
+
+UPDATE `posts` 
+SET subject='This is New Test Subject' 
+---- ამ შემთხვევაში subject შეიცვლება ყველა row-ში, რადგანაც მითითებული არ გვაქვს, თუ რომელი id-ში უნდა შეიცვალოს !!!
+
+
+UPDATE posts
+SET subject='This is New Test Subject', content='This is New Test content'
+---- ამ შემთხვევაში subject და content შეიცვლება ყველა row-ში, რადგანაც მითითებული არ გვაქვს, თუ რომელი id-ში უნდა შეიცვალოს !!!
+
+
+UPDATE posts
+SET subject='This is New Test Subject', content='This is New Test content'
+WHERE Id='1'
+---- ამ შემთხვევაში subject და content შეიცვლება მხოლოდ იმ row-ში, რომელიც მითითებული გვაქვს id-ის სახით !!!
+
+---------------------------------------------------------------------------------------------------------
+
+// 4) ინფორმაციის წაშლა ბაზიდან - Delete Query
+
+DELETE FROM posts
+WHERE id='1'
+
+---------------------------------------------------------------------------------------------------------
+
+// 5) ინფორმაციის დალაგება ზრდადობით ან კლებადობით - ORDER BY (ASC ან DESC)
+
+SELECT * FROM posts ORDER BY id ASC - ზრდადობით id-ის მეხედვით
+
+SELECT * FROM posts ORDER BY id DESC - კლებადობით id-ის მეხედვით
+
+
+
+
+==============================================================================================================================
+==============================================================================================================================
+
+
+                                ------- How to CONNECT to a DB -------
+
+step 1 - set DB parametres:
+
+    $DB_ServerName = "localhost";
+    $DB_UserName = "root";
+    $DB_Password = "";
+    $DB_Name = "LoginSystem";
+
+step 2 - put DB parametres into the mysql_connection() function:
+
+    $conn = mysqli_connect($DB_ServerName, $DB_UserName, $DB_Password, $DB_Name);
+
+step 3 - SELECT data into DB with SQL statement:
+
+    $sql = "SELECT * FROM `users`;";
+    ან/და
+    $sql = "SELECT * FROM `users` WHERE user_first='Daniel';";
+    ან/და
+    $sql = "SELECT 'user_email' FROM `users` WHERE user_first='Daniel';";
+
+step 4 - INSERT Data into Website from DB (Quering Code):
+
+    $result = mysqli_query($conn, $sql);
+
+step 5 - Check results:
+
+    $resultCheck = mysqli_num_rows($result);
+
+step 6 - save info in variable ($row) with assoc array and fetch it:
+
+    if ($resultCheck > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo $row['user_uid']."<br>";
+            }
+        }
+
+==============================================================================================================================
+==============================================================================================================================
+
+*** 1) Connect To DB (dbh.inc.php):
+
+<?php 
+    $DB_ServerName = "localhost";
+    $DB_UserName = "root";
+    $DB_Password = "";
+    $DB_Name = "LoginSystem";
+
+    $conn = mysqli_connect($DB_ServerName, $DB_UserName, $DB_Password, $DB_Name);
+?>
+
+---------------------------------------------------------------------------------------
+
+
+*** 2) insert Data from DB into Page <<<<:
+
+<?php 
+    include_once 'includes/dbh.inc.php';
+?>
+
+<!DOCTYPE html>
+<head>
+    <title>Document</title>
+</head>
+<body>
+
+    <?php
+        $sql = "SELECT * FROM `users`;";
+
+        $result = mysqli_query($conn, $sql);
+
+        $resultCheck = mysqli_num_rows($result);
+
+        if ($resultCheck > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo $row['user_id']."<br>";
+                echo $row['user_first']."<br>";
+                echo $row['user_last']."<br>";
+                echo $row['user_email']."<br>";
+                echo $row['user_uid']."<br>";
+                echo $row['user_pwd']."<br>";
+            }
+        }
+    ?>
+    
+</body>
+</html>
+
+---------------------------------------------------------------------------------------
+
+
+*** 3) insert Data into DB from Page >>>> :
+
+<?php
+    include_once 'dbh.inc.php';
+
+    $First_name = mysqli_real_escape_string($conn, $_POST['First_name']) ;
+    $Last_name = mysqli_real_escape_string($conn, $_POST['Last_name']);
+    $Email = mysqli_real_escape_string($conn, $_POST['Email']);
+    $User_uid = mysqli_real_escape_string($conn, $_POST['User_uid']);
+    $Password = mysqli_real_escape_string($conn, $_POST['Password']);
+    
+    $sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd) VALUES ('$First_name', '$Last_name', '$Email', '$User_uid', '$Password');";
+
+    mysqli_query($conn, $sql);
+
+    header("Location: ../index_38_insert_into_DB.php?signup=success")
+?>
+
+==============================================================================================================================
+==============================================================================================================================
+
+
+// 1) Prepared statements - insert data into Page from DB <<<<
+// This Functions of Prepared statemnts are only for PP PHP (Not for OOP PHP) !!!
+
+
+
+        $data1 = "Admin";
+        $data2 = "Daniel";
+        $sql = "SELECT * FROM `users` WHERE user_uid=? AND user_first=?;";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            echo "SQL statement failed!";
+        } else {
+            mysqli_stmt_bind_param($stmt, "ss", $data1, $data2);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo $row['user_id']."<br>";
+                echo $row['user_first']."<br>";
+                echo $row['user_last']."<br>";
+                echo $row['user_email']."<br>";
+                echo $row['user_uid']."<br>";
+                echo $row['user_pwd']."<br>";
+            }
+        }
+
+
+
+
+// 2) Prepared statements - insert data from Page into DB  >>>>
+// This Functions of Prepared statemnts are only for PP PHP (Not for OOP PHP) !!!
+
+    include_once 'dbh.inc.php';
+
+    $First_name = mysqli_real_escape_string($conn, $_POST['First_name']) ;
+    $Last_name = mysqli_real_escape_string($conn, $_POST['Last_name']);
+    $Email = mysqli_real_escape_string($conn, $_POST['Email']);
+    $User_uid = mysqli_real_escape_string($conn, $_POST['User_uid']);
+    $Password = mysqli_real_escape_string($conn, $_POST['Password']);
+    
+    $sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd) VALUES (?, ?, ?, ?, ?);";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        echo "SQL error!";
+    } else {
+        mysqli_stmt_bind_param($stmt, "sssss", $First_name, $Last_name, $Email, $User_uid, $Password);
+        mysqli_stmt_execute($stmt);
+    }
+    header("Location: ../insert_into_DB.php?signup=success")
+
+
+==============================================================================================================================
+==============================================================================================================================
+
